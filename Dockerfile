@@ -1,6 +1,19 @@
 FROM alpine
 USER root
 
+ARG BUILD_DATE
+ARG VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="postfix-gmail-relay" \
+      org.label-schema.description="Use postfix to relay emails from LAN through gmail. Great to use in conjunction with other docker images or in a lab/testing environment." \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/shibz/docker-postfix-gmail-relay" \
+      org.label-schema.docker.cmd="docker run -d -h relay.example.com --name=mailrelay -e EMAIL=myLogin@gmail.com -e EMAILPASS=myPassword -p 25:25 shibz/postfix-gmail-relay" \
+      org.label-schema.docker.cmd.devel="docker run -it -h relay.example.com --name=mailrelay -e EMAIL=myLogin@gmail.com -e EMAILPASS=myPassword -p 25:25 shibz/postfix-gmail-relay" \
+      org.label-schema.docker.cmd.debug="docker exec -it \$CONTAINER /bin/sh" \
+      org.label-schema.docker.params="EMAIL=Google-hosted email address to log into,EMAILPASS=Password for email account.  Alternatively specify by binding /config/credentials file,SYSTEM_TIMEZONE=Alternative timezone if UTC is not desired,MYNETWORKS=Specify list of space-separated subnets to relay messages for.  The default should be fine for most people." \
+      org.label-schema.schema-version="1.0"
+
 RUN apk add --no-cache postfix rsyslog supervisor tzdata && \
 # main.cf
 postconf -e smtpd_banner="\$myhostname ESMTP" && \
