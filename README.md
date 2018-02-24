@@ -1,4 +1,4 @@
-## postfix-gmail-relay
+# postfix-gmail-relay
 
 Use postfix to relay emails from LAN through gmail.  Great to use in conjunction with other docker images or in a lab/testing environment.
 
@@ -6,7 +6,7 @@ Fork/rewrite of [LyleScott/docker-postfix-gmail-relay](https://github.com/LyleSc
 
 NOTE: works with domains hosted by Google, also. ie, Google for Work.  Note that you MUST enable your account to accept logins from "less secure apps" for this to work.
 
-# Configuration
+## Configuration
 
 ```
 SYSTEM_TIMEZONE = UTC or America/New_York (UTC is the default)
@@ -17,7 +17,7 @@ EMAILPASS = password (is turned into a hash and this env variable is removed at 
 
 EMAIL and EMAILPASS may also be added by creating a folder, saving them into a file named ``credentials`` in that folder, and binding that folder to ``/config``.  See below.
 
-# Example
+## Example
 Create a file with desired credentials
 ```bash
 mkdir /postfix-config
@@ -39,12 +39,12 @@ docker create \
     -e SYSTEM_TIMEZONE="America/New_York" \
     -p 25:25 \
     -v /postfix-config:/config \
-    postfix-gmail-relay
+    shibz/postfix-gmail-relay
 
-docker start postfix-gmail-relay
+docker start gmailrelay
 ```
 
-# Testing
+## Testing
 You can use netcat to test.  After the final ".", press "enter" to send the message.  Regardless of the "from" address you use here, the email will arrive "from" the email you used to create this docker container.
 
 ```bash
