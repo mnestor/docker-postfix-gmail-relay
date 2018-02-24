@@ -1,11 +1,12 @@
-# docker-postfix-gmail-relay
-A docker image that uses postfix as a relay through gmail. Useful to link to other images.
+## postfix-gmail-relay
 
-Fork/rewrite of [LyleScott/docker-postfix-gmail-relay](https://github.com/LyleScott/docker-postfix-gmail-relay) using the latest alpine instead of ubuntu 14.04 and with the added ability to load the password from a text file rather than environment variable to avoid exposing your gmail password to anyone who has permission to run "docker inspect".
+Use postfix to relay emails from LAN through gmail.  Great to use in conjunction with other docker images or in a lab/testing environment.
+
+Fork/rewrite of [LyleScott/docker-postfix-gmail-relay](https://github.com/LyleScott/docker-postfix-gmail-relay) using the latest alpine instead of ubuntu 14.04 to modernize it and reduce size by over 80%.  Also added option to load the password from a text file (if desired) rather than environment variable to avoid exposing your gmail password to anyone who has permission to run "docker inspect".
 
 NOTE: works with domains hosted by Google, also. ie, Google for Work.  Note that you MUST enable your account to accept logins from "less secure apps" for this to work.
 
-## Configurables
+# Configuration
 
 ```
 SYSTEM_TIMEZONE = UTC or America/New_York (UTC is the default)
@@ -16,7 +17,7 @@ EMAILPASS = password (is turned into a hash and this env variable is removed at 
 
 EMAIL and EMAILPASS may also be added by creating a folder, saving them into a file named ``credentials`` in that folder, and binding that folder to ``/config``.  See below.
 
-## Example
+# Example
 Create a file with desired credentials
 ```bash
 mkdir /postfix-config
@@ -30,6 +31,7 @@ EMAIL=myemail@gmail.com
 EMAILPASS=mypasswordhere
 ```
 
+Create and start the container
 ```bash
 docker create \
     --name gmailrelay \
@@ -42,6 +44,7 @@ docker create \
 docker start postfix-gmail-relay
 ```
 
+# Testing
 You can use netcat to test.  After the final ".", press "enter" to send the message.  Regardless of the "from" address you use here, the email will arrive "from" the email you used to create this docker container.
 
 ```bash
