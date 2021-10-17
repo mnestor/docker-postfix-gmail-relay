@@ -38,5 +38,11 @@ fi
 unset EMAIL
 unset EMAILPASS
 
-mkdir -p /var/log/supervisor
-exec /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+
+#Start services
+
+# If host mounting /var/spool/postfix, we need to delete old pid file before
+# starting services
+rm -f /var/spool/postfix/pid/master.pid
+
+exec /usr/sbin/postfix -c /etc/postfix start-fg
