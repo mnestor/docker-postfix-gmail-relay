@@ -3,6 +3,7 @@ FROM alpine:3.14.2
 RUN apk add --no-cache postfix tzdata && \
       # main.cf
       postconf -e smtpd_banner="\$myhostname ESMTP" && \
+      postconf -e maillog_file=/dev/stdout && \
       postconf -e relayhost=[smtp.gmail.com]:587 && \
       postconf -e smtp_sasl_auth_enable=yes && \
       postconf -e smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd && \
