@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:13.4.2
 USER root
 
 ARG BUILD_DATE
@@ -7,7 +7,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="postfix-gmail-relay" \
       org.label-schema.description="Use postfix to relay emails from LAN through gmail. Great to use in conjunction with other docker images or in a lab/testing environment." \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/shibz/docker-postfix-gmail-relay" \
+      org.label-schema.vcs-url="https://github.com/mnestor/docker-postfix-gmail-relay" \
       org.label-schema.docker.cmd="docker run -d -h relay.example.com --name=mailrelay -e EMAIL=myLogin@gmail.com -e EMAILPASS=myPassword -p 25:25 shibz/postfix-gmail-relay" \
       org.label-schema.docker.cmd.devel="docker run -it -h relay.example.com --name=mailrelay -e EMAIL=myLogin@gmail.com -e EMAILPASS=myPassword -p 25:25 shibz/postfix-gmail-relay" \
       org.label-schema.docker.cmd.debug="docker exec -it \$CONTAINER /bin/sh" \
