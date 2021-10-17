@@ -25,11 +25,11 @@ if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     chmod 600 /etc/postfix/sasl_passwd
     echo "[smtp.gmail.com]:587    ${EMAIL}:${EMAILPASS}" > /etc/postfix/sasl_passwd
     postmap /etc/postfix/sasl_passwd
-    rm /etc/postfix/sasl_passwd
-    chmod 600 /etc/postfix/sasl_passwd.db
+    #rm /etc/postfix/sasl_passwd
+    chmod 600 /etc/postfix/sasl_passwd.lmdb
     echo "postfix EMAIL/EMAILPASS combo is setup."
 else
-    if [ -f /etc/postfix/sasl_passwd.db ]; then
+    if [ -f /etc/postfix/sasl_passwd.lmdb ]; then
         echo "EMAIL or EMAILPASS not set, but /etc/postfix/sasl_passwd.db already exists so it's safe to ignore"
     else
         echo "EMAIL or EMAILPASS not set!"

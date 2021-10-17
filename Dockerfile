@@ -6,7 +6,7 @@ RUN apk add --no-cache postfix tzdata && \
       postconf -e maillog_file=/dev/stdout && \
       postconf -e relayhost=[smtp.gmail.com]:587 && \
       postconf -e smtp_sasl_auth_enable=yes && \
-      postconf -e smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd && \
+      postconf -e smtp_sasl_password_maps=lmdb:/etc/postfix/sasl_passwd && \
       postconf -e smtp_sasl_security_options=noanonymous && \
       postconf -e smtp_use_tls=yes && \
       postconf -e mynetworks="10.0.0.0/8 172.16.0.0/12 192.168.0.0/16" && \
