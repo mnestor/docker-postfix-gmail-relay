@@ -1,4 +1,4 @@
-FROM alpine:13.4.2
+FROM alpine:3.14.2
 USER root
 
 ARG BUILD_DATE
