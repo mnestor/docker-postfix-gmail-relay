@@ -19,6 +19,12 @@ if [ ! -z "${MYNETWORKS}" ]; then
     postconf -e mynetworks="${MYNETWORKS}"
 fi
 
+# Set relayhost
+if [ ! -z "${RELAY_HOST}" ]; then
+    echo "setting relayhost = ${RELAY_HOST}"
+    postconf -e relayhost="[${RELAY_HOST}]${RELAY_PORT:-587}"
+fi
+
 # General the email/password hash and remove evidence.
 if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     touch /etc/postfix/sasl_passwd
