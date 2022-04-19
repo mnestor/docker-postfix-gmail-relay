@@ -20,16 +20,14 @@ if [ ! -z "${MYNETWORKS}" ]; then
 fi
 
 # Set relayhost
-if [ ! -z "${RELAY_HOST}" ]; then
-    echo "setting relayhost = ${RELAY_HOST}"
-    postconf -e relayhost="[${RELAY_HOST}]:${RELAY_PORT:-587}"
-fi
+echo "setting relayhost = ${RELAY_HOST:-smtp.gmail.com}"
+postconf -e relayhost="[${RELAY_HOST:-smtp.gmail.com}]:${RELAY_PORT:-587}"
 
 # General the email/password hash and remove evidence.
 if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     touch /etc/postfix/sasl_passwd
     chmod 600 /etc/postfix/sasl_passwd
-    echo "[smtp.gmail.com]:587    ${EMAIL}:${EMAILPASS}" > /etc/postfix/sasl_passwd
+    echo "[${RELAY_HOST:-smtp.gmail.com}]:${RELAY_PORT:-587}    ${EMAIL}:${EMAILPASS}" > /etc/postfix/sasl_passwd
     postmap /etc/postfix/sasl_passwd
     #rm /etc/postfix/sasl_passwd
     chmod 600 /etc/postfix/sasl_passwd.lmdb
