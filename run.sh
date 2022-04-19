@@ -19,6 +19,8 @@ if [ ! -z "${MYNETWORKS}" ]; then
     postconf -e mynetworks="${MYNETWORKS}"
 fi
 
+postconf -e myhostname=${HOSTNAME:-$(hostname)}
+
 # Set relayhost
 echo "setting relayhost = ${RELAY_HOST:-smtp.gmail.com}"
 postconf -e relayhost="[${RELAY_HOST:-smtp.gmail.com}]:${RELAY_PORT:-587}"
