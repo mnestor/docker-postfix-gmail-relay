@@ -22,7 +22,7 @@ fi
 # Set relayhost
 if [ ! -z "${RELAY_HOST}" ]; then
     echo "setting relayhost = ${RELAY_HOST}"
-    postconf -e relayhost="[${RELAY_HOST}]${RELAY_PORT:-587}"
+    postconf -e relayhost="[${RELAY_HOST}]:${RELAY_PORT:-587}"
 fi
 
 # General the email/password hash and remove evidence.
