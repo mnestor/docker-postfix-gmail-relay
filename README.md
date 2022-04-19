@@ -13,6 +13,8 @@ SYSTEM_TIMEZONE = UTC or America/New_York (UTC is the default)
 MYNETWORKS = "10.0.0.0/8 192.168.0.0/16 172.0.0.0/8" (this is the default)
 EMAIL = gmail or google domain
 EMAILPASS = password (is turned into a hash and this env variable is removed at boot)
+RELAY_HOST = smtp.gmail.com
+RELAY_PORT = 587
 ```
 
 EMAIL and EMAILPASS may also be added by creating a folder, saving them into a file named ``credentials`` in that folder, and binding that folder to ``/config``.  See below.
